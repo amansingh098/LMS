@@ -19,7 +19,7 @@ const Home = () => {
   <div className="w-full md:w-1/2 md:pr-8 mb-8 md:mb-0 flex flex-col justify-center">
     <h2 className="text-3xl font-bold mb-4 text-white">A Broad Selection of Courses</h2>
     <p className="text-xl mb-6 text-gray-300">
-      Choose from over 210,000 online video courses with new additions published every month. Learning Destiny offers courses covering a wide range of topics, including web development, data science, business, design, marketing, and more. Whether you're a beginner looking to learn the basics or an expert seeking advanced skills, our platform has something for everyone.
+      Choose from over 10,000 online video courses with new additions published every month. Learning Destiny offers courses covering a wide range of topics, including web development, data science, business, design, marketing, and more. Whether you're a beginner looking to learn the basics or an expert seeking advanced skills, our platform has something for everyone.
     </p>
   </div>
 
