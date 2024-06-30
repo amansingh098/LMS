@@ -20,22 +20,43 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="flex h-screen bg-gray-900 text-white">
-      {/* Sidebar (Mobile) */}
-      <div className={`md:hidden fixed top-0 left-0 h-screen w-64 bg-gray-950 z-50 ${showSidebar ? 'block' : 'hidden'}`}>
-        <div className="flex items-center justify-between p-4">
-          <img
-            src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
-            alt="Avatar"
-            className="rounded-full w-16 h-16 mb-2"
-          />
+    <div className="flex h-screen bg-gray-900 text-white relative">
+      {/* Hamburger Menu for Mobile */}
+      <div className="md:hidden fixed top-4 left-4 z-50">
+        {!showSidebar ? (
+          <button
+            onClick={openSidebar}
+            className="text-gray-400 focus:outline-none"
+          >
+            <FaBars className="text-2xl" />
+          </button>
+        ) : (
           <button
             onClick={closeSidebar}
             className="text-gray-400 focus:outline-none"
           >
             <FaTimes className="text-2xl" />
           </button>
-        </div>
+        )}
+      </div>
+
+      {/* Sidebar (Mobile) */}
+      <aside
+        className={`md:hidden fixed top-0 left-0 h-screen w-64 bg-gray-950 z-40 ${showSidebar ? 'block' : 'hidden'}`}
+      >
+<div className="flex items-center justify-between p-4 relative">
+  <div className="flex flex-col items-center">
+    <img
+      src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
+      alt="Avatar"
+      className="rounded-full w-16 h-16 mb-2"
+    />
+    <div className="text-xl font-bold">Username</div>
+  </div>
+ 
+</div>
+
+
         <nav>
           <button
             onClick={() => handleNavigate('/admin-dashboard/allCourses')}
@@ -80,18 +101,19 @@ const AdminDashboard = () => {
             Logout
           </button>
         </nav>
-      </div>
+      </aside>
 
       {/* Sidebar (Desktop) */}
       <aside className="hidden md:flex md:flex-col md:w-64 p-4 bg-gray-950">
-        <div className="flex items-center mb-8">
-          <img
-            src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
-            alt="Avatar"
-            className="rounded-full w-16 h-16 mb-2"
-          />
-          <div className="text-xl font-bold ml-2">Username</div>
-        </div>
+      <div className="flex flex-col items-center mb-8">
+  <img
+    src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
+    alt="Avatar"
+    className="rounded-full w-16 h-16 mb-2"
+  />
+  <div className="text-xl font-bold">Username</div>
+</div>
+
         <nav>
           <button
             onClick={() => handleNavigate('/admin-dashboard/allCourses')}

@@ -64,69 +64,133 @@ const Navbar = () => {
         </div>
 
         {/* Right Side Menu Items */}
-        <div className={`absolute top-16 left-0 right-0 bg-gray-900 z-10 md:hidden ${showMenu ? 'block' : 'hidden'}`}>
-          <div className="flex flex-col items-center py-4">
-            <button
-              onClick={() => navigate('/')}
-              className="text-gray-300 hover:text-white focus:outline-none mb-4"
-            >
-              Learning Destiny Business
-            </button>
-            <button
-              onClick={() => navigate('/')}
-              className="text-gray-300 hover:text-white focus:outline-none mb-4"
-            >
-              Teach on Learning Destiny
-            </button>
-            <button
-              onClick={() => navigate('/')}
-              className="text-gray-300 hover:text-white focus:outline-none mb-4"
-            >
-              My learning
-            </button>
-            <FaBell className="text-gray-300 hover:text-white cursor-pointer mb-4" />
-            <FaShoppingCart className="text-gray-300 hover:text-white cursor-pointer mb-4" />
-            {isLoggedIn ? (
-              <div className="relative">
-                <FaUserCircle className="text-gray-300 hover:text-white cursor-pointer mb-4" />
-                <FaChevronDown className="absolute right-0 top-0 mt-2 text-gray-400" />
-                <ul className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1">
-                  <li>
-                    <button
-                      onClick={() => navigate('/profile')}
-                      className="block px-4 py-2 text-sm text-gray-300 hover:text-white focus:outline-none"
-                    >
-                      Profile
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      onClick={handleLogout}
-                      className="block px-4 py-2 text-sm text-gray-300 hover:text-white focus:outline-none"
-                    >
-                      Logout
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            ) : (
-              <div className="flex items-center mb-4">
-                <button
-                  onClick={() => navigate('/login')}
-                  className="text-gray-300 hover:text-white focus:outline-none"
-                >
-                  Login
-                </button>
-                <span className="text-gray-400 mx-2">/</span>
-                <button
-                  onClick={() => navigate('/signup')}
-                  className="text-gray-300 hover:text-white focus:outline-none"
-                >
-                  Sign Up
-                </button>
-              </div>
-            )}
-          </div>
+        <div className="hidden md:flex items-center space-x-4">
+          <button
+            onClick={() => navigate('/')}
+            className="hover:text-white focus:outline-none"
+          >
+            Learning Destiny Business
+          </button>
+          <button
+            onClick={() => navigate('/')}
+            className="hover:text-white focus:outline-none"
+          >
+            Teach on Learning Destiny
+          </button>
+          <button
+            onClick={() => navigate('/')}
+            className="hover:text-white focus:outline-none"
+          >
+            My learning
+          </button>
+          <FaBell className="hover:text-white cursor-pointer" />
+          <FaShoppingCart className="hover:text-white cursor-pointer" />
+          {isLoggedIn ? (
+            <div className="relative">
+              <FaUserCircle className="hover:text-white cursor-pointer" />
+              <FaChevronDown className="absolute right-0 top-0 mt-2 text-gray-400" />
+              <ul className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1">
+                <li>
+                  <button
+                    onClick={() => navigate('/profile')}
+                    className="block px-4 py-2 text-sm text-gray-300 hover:text-white focus:outline-none"
+                  >
+                    Profile
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={handleLogout}
+                    className="block px-4 py-2 text-sm text-gray-300 hover:text-white focus:outline-none"
+                  >
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <div className="flex items-center">
+              <button
+                onClick={() => navigate('/login')}
+                className="hover:text-white focus:outline-none"
+              >
+                Login
+              </button>
+              <span className="text-gray-400 mx-2">/</span>
+              <button
+                onClick={() => navigate('/signup')}
+                className="hover:text-white focus:outline-none"
+              >
+                Sign Up
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      <div className={`absolute top-16 left-0 right-0 bg-gray-900 z-10 md:hidden ${showMenu ? 'block' : 'hidden'}`}>
+        <div className="flex flex-col items-center py-4">
+          <button
+            onClick={() => navigate('/')}
+            className="text-gray-300 hover:text-white focus:outline-none mb-4"
+          >
+            Learning Destiny Business
+          </button>
+          <button
+            onClick={() => navigate('/')}
+            className="text-gray-300 hover:text-white focus:outline-none mb-4"
+          >
+            Teach on Learning Destiny
+          </button>
+          <button
+            onClick={() => navigate('/')}
+            className="text-gray-300 hover:text-white focus:outline-none mb-4"
+          >
+            My learning
+          </button>
+          <FaBell className="text-gray-300 hover:text-white cursor-pointer mb-4" />
+          <FaShoppingCart className="text-gray-300 hover:text-white cursor-pointer mb-4" />
+          {isLoggedIn ? (
+            <div className="relative">
+              <FaUserCircle className="text-gray-300 hover:text-white cursor-pointer mb-4" />
+              <FaChevronDown className="absolute right-0 top-0 mt-2 text-gray-400" />
+              <ul className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1">
+                <li>
+                  <button
+                    onClick={() => navigate('/profile')}
+                    className="block px-4 py-2 text-sm text-gray-300 hover:text-white focus:outline-none"
+                  >
+                    Profile
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={handleLogout}
+                    className="block px-4 py-2 text-sm text-gray-300 hover:text-white focus:outline-none"
+                  >
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <div className="flex items-center">
+              <button
+                onClick={() => navigate('/login')}
+                className="text-gray-300 hover:text-white focus:outline-none"
+              >
+                Login
+              </button>
+              <span className="text-gray-400 mx-2">/</span>
+              <button
+                onClick={() => navigate('/signup')}
+                className="text-gray-300 hover:text-white focus:outline-none"
+              >
+                Sign Up
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </nav>
