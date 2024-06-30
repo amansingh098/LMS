@@ -39,19 +39,19 @@ const Navbar = () => {
       </div>
       <div className="flex items-center space-x-4">
         <button
-          onClick={() => navigate('/business')}
+          onClick={() => navigate('/')}
           className="hover:text-white focus:outline-none"
         >
           Learning Destiny Business
         </button>
         <button
-          onClick={() => navigate('/teach')}
+          onClick={() => navigate('/')}
           className="hover:text-white focus:outline-none"
         >
           Teach on Learning Destiny
         </button>
         <button
-          onClick={() => navigate('/my-learning')}
+          onClick={() => navigate('/')}
           className="hover:text-white focus:outline-none"
         >
           My learning
