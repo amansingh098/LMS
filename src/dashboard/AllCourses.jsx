@@ -1,42 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import { firestore } from '../firebase'; // Import firestore from your Firebase config
+import { useAuth } from '../Authentication/AuthContext'; // Import AuthContext to get the current user
 import CourseCard from '../components/CourseCard'; // Import CourseCard component
 
 const AllCourses = () => {
-  // Example data (replace with actual course data)
-  const courses = [
-    {
-      "id": 1,
-      "title": "React - The Complete Guide (incl Hooks, React Router, Redux)",
-      "description": "Dive in and learn React from scratch! Learn Reactjs, Hooks, Redux, React Routing, Animations, Next.js and way more!",
-      "imageUrl": "https://source.unsplash.com/800x600/?react", // Random image URL for React
-      "instructor": {
-        "name": "Maximilian Schwarzmüller",
-        "avatarUrl": "https://source.unsplash.com/40x40/?profile" // Random profile image URL
-      }
-    },
-    {
-      "id": 2,
-      "title": "JavaScript - The Complete Guide 2024 (Beginner + Advanced)",
-      "description": "Modern JavaScript from the beginning - all the way up to JS expert level! THE must-have JavaScript resource in 2024.",
-      "imageUrl": "https://source.unsplash.com/800x600/?javascript", // Random image URL for JavaScript
-      "instructor": {
-        "name": "Academind by Maximilian Schwarzmüller",
-        "avatarUrl": "https://source.unsplash.com/40x40/?instructor" // Random profile image URL
-      }
-    }
-  ];
-      
-    // Add more courses as needed
-  
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { currentUser } = useAuth(); // Get current user from AuthContext
 
-
-    return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {courses.map((course) => (
-            <CourseCard key={course.id} course={course} />
-          ))}
-        </div>
-      );
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(firestore, 'courses'));
+        const courseData = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setCourses(courseData);
+      } catch (error) {
+        console.error('Error fetching courses:', error);
+      } finally {
+        setLoading(false);
+      }
     };
+
+    fetchCourses();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (courses.length === 0) {
+    return <div>No courses available</div>;
+  }
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {courses.map((course) => (
+        <CourseCard key={course.id} course={course} currentUser={currentUser} />
+      ))}
+    </div>
+  );
+};
 
 export default AllCourses;
