@@ -3,8 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { setDoc, doc } from 'firebase/firestore';
 import { auth, firestore } from '../firebase';
+import Navbar from "../components/navbar.jsx"; // Import Navbar if you have it, or remove if not needed
 
-function SignupPage() {
+const backgroundImageUrl = 'https://c4.wallpaperflare.com/wallpaper/410/867/750/vector-forest-sunset-forest-sunset-forest-wallpaper-thumb.jpg'; // Replace with your Google image URL
+
+const SignupPage = () => {
   const navigate = useNavigate();
   const usernameRef = useRef();
   const emailRef = useRef();
@@ -40,31 +43,33 @@ function SignupPage() {
       setError(error.message);
     }
   };
-
   return (
-    <div className="bg-gray-900 min-h-screen flex items-center justify-center">
-      <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-3xl font-bold mb-6 text-white text-center">Sign Up</h2>
-        {error && <p className="text-red-500 mb-4">{error}</p>}
-        <form onSubmit={handleSignup}>
-          <div className="mb-4">
-            <label htmlFor="username" className="block text-gray-300 mb-2">Username</label>
-            <input type="text" id="username" ref={usernameRef} className="bg-gray-700 h-10 px-3 rounded-lg w-full text-white outline-none focus:ring-2 focus:ring-purple-600" required />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="email" className="block text-gray-300 mb-2">Email</label>
-            <input type="email" id="email" ref={emailRef} className="bg-gray-700 h-10 px-3 rounded-lg w-full text-white outline-none focus:ring-2 focus:ring-purple-600" required />
-          </div>
-          <div className="mb-6">
-            <label htmlFor="password" className="block text-gray-300 mb-2">Password</label>
-            <input type="password" id="password" ref={passwordRef} className="bg-gray-700 h-10 px-3 rounded-lg w-full text-white outline-none focus:ring-2 focus:ring-purple-600" required />
-          </div>
-          <button type="submit" className="bg-purple-600 text-white py-2 px-4 w-full rounded-lg font-semibold hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600">Sign Up</button>
-        </form>
-        <p className="text-gray-400 text-sm mt-4">Already have an account? <span className="text-purple-600 cursor-pointer" onClick={() => navigate('/login')}>Login</span></p>
+    <div className="min-h-screen flex flex-col bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImageUrl})` }}>
+      <Navbar className="bg-black text-white py-4" /> {/* Adjust classes for black and white theme */}
+      <div className="flex flex-1 items-center justify-center">
+        <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md"> {/* Adjust background and text colors */}
+          <h2 className="text-3xl font-bold mb-6 text-black text-center">Sign Up</h2> {/* Adjust text color */}
+          {/* Error handling */}
+          <form onSubmit={handleSignup}>
+            <div className="mb-4">
+              <label htmlFor="username" className="block text-gray-700 mb-2">Username</label> {/* Adjust label color */}
+              <input type="text" id="username" className="bg-gray-200 h-10 px-3 rounded-lg w-full text-black outline-none focus:ring-2 focus:ring-purple-600" required /> {/* Adjust input field colors */}
+            </div>
+            <div className="mb-4">
+              <label htmlFor="email" className="block text-gray-700 mb-2">Email</label> {/* Adjust label color */}
+              <input type="email" id="email" className="bg-gray-200 h-10 px-3 rounded-lg w-full text-black outline-none focus:ring-2 focus:ring-purple-600" required /> {/* Adjust input field colors */}
+            </div>
+            <div className="mb-6">
+              <label htmlFor="password" className="block text-gray-700 mb-2">Password</label> {/* Adjust label color */}
+              <input type="password" id="password" className="bg-gray-200 h-10 px-3 rounded-lg w-full text-black outline-none focus:ring-2 focus:ring-purple-600" required /> {/* Adjust input field colors */}
+            </div>
+            <button type="submit" className="bg-blue-500 text-white py-2 px-4 w-full rounded-lg font-semibold hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-purple-600">Sign Up</button> {/* Adjust button colors */}
+          </form>
+          <p className="text-gray-500 text-sm mt-4">Already have an account? <span className="text-purple-600 cursor-pointer" onClick={() => navigate('/login')}>Login</span></p> {/* Adjust text color */}
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default SignupPage;

@@ -14,6 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import { useAuth } from './Authentication/AuthContext'; // Adjust the import path as needed
 import CoursePreview from './dashboard/CoursePreview';
+import Enroll from './student/Enroll';
 
 // AdminLayout component for protected routes
 const AdminLayout = ({ children }) => {
@@ -32,6 +33,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/enroll" element={<Enroll />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
 
@@ -46,9 +48,8 @@ function App() {
           >
             <Route path="addCourses" element={<AddCourses />} />
             <Route path="allCourses" element={<AllCourses />} />
-            <Route path="course/:courseid" element={<CoursePreview/>}/>
+            <Route path="course/:courseId" element={<CoursePreview />} />
             <Route path="students" element={<Students />} />
-
             <Route path="analytics" element={<Analytics />} />
             <Route path="settings" element={<Settings />} />
           </Route>
