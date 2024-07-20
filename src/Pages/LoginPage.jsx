@@ -7,7 +7,7 @@ import Footer from '../components/Footer';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const backgroundImageUrl = 'https://images3.alphacoders.com/133/thumb-1920-1338701.png'; // Replace with your Google image URL
+const backgroundImageUrl = 'https://wallpapercave.com/wp/wp9764093.jpg';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -24,7 +24,6 @@ const LoginPage = () => {
       navigate('/admin-dashboard/allCourses');
       toast.success('Login successful!');
       console.log("login success");
-
     } catch (error) {
       console.error('Error logging in:', error);
       toast.error(error.message || 'Failed to login. Please try again.');
@@ -36,13 +35,11 @@ const LoginPage = () => {
   return (
     <div className="min-h-screen flex flex-col bg-cover bg-center relative" style={{ 
       backgroundImage: `url(${backgroundImageUrl})`,
-      padding: '100' ,
-      margin:'100'
     }}>
-      <Navbar className="bg-blue-500 text-white py-4" />
+      
       <div className="flex flex-1 items-center justify-center">
         <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-          <h2 className="text-3xl font-bold mb-6 text-center">Login</h2>
+          <h2 className="text-3xl font-bold mb-6 text-center text-black">Login</h2>
           <form onSubmit={handleLogin}>
             <div className="mb-4">
               <label htmlFor="email" className="block text-gray-700 mb-2">Email</label>
@@ -83,6 +80,7 @@ const LoginPage = () => {
         </div>
       </div>
       
+      <ToastContainer />
     </div>
   );
 };

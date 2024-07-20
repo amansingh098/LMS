@@ -9,7 +9,15 @@ const CourseCard = ({ course, currentUser }) => {
   };
 
   return (
-    <div className="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+    <div 
+      className="bg-gray-800 rounded-lg shadow-lg overflow-hidden"
+      style={{
+        backgroundImage: `url('https://static.vecteezy.com/system/resources/previews/029/887/892/non_2x/colorful-gradients-modern-and-clean-background-free-vector.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        color: 'white',
+      }}
+    >
       <img 
         src={course.imageUrl || 'https://source.unsplash.com/800x600/?course'} 
         alt={course.title} 

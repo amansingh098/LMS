@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { FaSearch, FaShoppingCart, FaBell, FaUserCircle, FaChevronDown, FaBars, FaTimes } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
+import { FaSearch, FaShoppingCart, FaBell, FaUserCircle, FaChevronDown, FaBars, FaTimes, FaSun, FaMoon } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
-const Navbar = () => {
+
+const Navbar = ({ isDarkMode, toggleTheme }) => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
@@ -18,20 +19,20 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gray-900 text-gray-200 px-4 py-3">
+    <nav className={`bg-${isDarkMode ? 'gray-900' : 'gray-100'} text-${isDarkMode ? 'gray-200' : 'gray-900'} px-4 py-3`}>
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo and Search */}
         <div className="flex items-center">
           <button
             onClick={() => navigate('/')}
-            className="text-xl font-bold text-white focus:outline-none"
+            className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-black'} focus:outline-none`}
           >
             Learning Destiny
           </button>
           <div className="relative text-gray-600 ml-4 hidden md:block">
             <input
               type="text"
-              className="bg-gray-800 h-10 px-5 pr-10 rounded-full text-sm focus:outline-none w-96"
+              className={`bg-${isDarkMode ? 'gray-800' : 'gray-200'} h-10 px-5 pr-10 rounded-full text-sm focus:outline-none w-96`}
               placeholder="Search for anything"
             />
             <button
@@ -85,6 +86,9 @@ const Navbar = () => {
           </button>
           <FaBell className="hover:text-white cursor-pointer" />
           <FaShoppingCart className="hover:text-white cursor-pointer" />
+          <button onClick={toggleTheme} className="focus:outline-none">
+            {isDarkMode ? <FaSun className="text-yellow-500" /> : <FaMoon className="text-gray-500" />}
+          </button>
           {isLoggedIn ? (
             <div className="relative">
               <FaUserCircle className="hover:text-white cursor-pointer" />
@@ -129,7 +133,7 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`absolute top-16 left-0 right-0 bg-gray-900 z-10 md:hidden ${showMenu ? 'block' : 'hidden'}`}>
+      <div className={`absolute top-16 left-0 right-0 bg-${isDarkMode ? 'gray-900' : 'gray-100'} z-10 md:hidden ${showMenu ? 'block' : 'hidden'}`}>
         <div className="flex flex-col items-center py-4">
           <button
             onClick={() => navigate('/')}

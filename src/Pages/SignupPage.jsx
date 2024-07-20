@@ -4,8 +4,10 @@ import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { setDoc, doc } from 'firebase/firestore';
 import { auth, firestore } from '../firebase';
 import Navbar from "../components/navbar.jsx"; // Import Navbar if you have it, or remove if not needed
-
-const backgroundImageUrl = 'https://c4.wallpaperflare.com/wallpaper/410/867/750/vector-forest-sunset-forest-sunset-forest-wallpaper-thumb.jpg'; // Replace with your Google image URL
+import Footer from '../components/Footer';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+const backgroundImageUrl = 'https://static.vecteezy.com/system/resources/previews/004/461/779/non_2x/abstract-wavy-background-in-pastel-color-design-sweet-color-free-vector.jpg';
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -45,7 +47,7 @@ const SignupPage = () => {
   };
   return (
     <div className="min-h-screen flex flex-col bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImageUrl})` }}>
-      <Navbar className="bg-black text-white py-4" /> {/* Adjust classes for black and white theme */}
+      
       <div className="flex flex-1 items-center justify-center">
         <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md"> {/* Adjust background and text colors */}
           <h2 className="text-3xl font-bold mb-6 text-black text-center">Sign Up</h2> {/* Adjust text color */}
@@ -68,6 +70,8 @@ const SignupPage = () => {
           <p className="text-gray-500 text-sm mt-4">Already have an account? <span className="text-purple-600 cursor-pointer" onClick={() => navigate('/login')}>Login</span></p> {/* Adjust text color */}
         </div>
       </div>
+     
+      <ToastContainer />
     </div>
   );
 };
