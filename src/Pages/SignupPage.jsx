@@ -9,7 +9,6 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-
 const backgroundImageUrl = 'https://static.vecteezy.com/system/resources/previews/004/461/779/non_2x/abstract-wavy-background-in-pastel-color-design-sweet-color-free-vector.jpg';
 
 const SignupPage = () => {
@@ -42,9 +41,7 @@ const SignupPage = () => {
       });
 
       console.log('User signed up and document created:', user);
-      toast.success('Signup successful!', {
-        position: toast.POSITION.TOP_CENTER,
-      });
+      toast.success('Signup successful!');
 
       // Navigate to the login page after a short delay
       setTimeout(() => {
@@ -53,9 +50,7 @@ const SignupPage = () => {
     } catch (error) {
       console.error('Error signing up:', error);
       setError(error.message);
-      toast.error(`Error: ${error.message}`, {
-        position: toast.POSITION.TOP_CENTER,
-      });
+      toast.error(`Error: ${error.message}`);
     }
   };
 
@@ -63,7 +58,7 @@ const SignupPage = () => {
     <div className="min-h-screen flex flex-col bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImageUrl})` }}>
       {/* Add Navbar if needed */}
       <div className="flex flex-1 items-center justify-center">
-        <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md bg-opacity-90 backdrop-blur-md">
+        <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md bg-opacity-70 backdrop-blur-md">
           <h2 className="text-3xl font-bold mb-6 text-black text-center">Sign Up</h2>
           {/* Error handling */}
           <form onSubmit={handleSignup}>

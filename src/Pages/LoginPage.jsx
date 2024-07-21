@@ -38,7 +38,7 @@ const LoginPage = () => {
     }}>
       
       <div className="flex flex-1 items-center justify-center">
-        <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md bg-opacity-50 backdrop-blur-md">
           <h2 className="text-3xl font-bold mb-6 text-center text-black">Login</h2>
           <form onSubmit={handleLogin}>
             <div className="mb-4">
