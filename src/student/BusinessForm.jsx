@@ -21,15 +21,15 @@ const BusinessForm = () => {
 
     // Generate WhatsApp link
     const whatsappMessage = `Hello, my name is ${name}. My email is ${email}. Here is my message: ${message}`;
-    const whatsappLink = `https://wa.me/1234567890?text=${encodeURIComponent(whatsappMessage)}`;
+    const whatsappLink = `https://api.whatsapp.com/send/?phone=9959068980&text=${encodeURIComponent(whatsappMessage)}&type=phone_number&app_absent=0`;
 
     // Redirect to WhatsApp
     window.location.href = whatsappLink;
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-full max-w-md">
+    <div className="flex justify-center items-center min-h-screen bg-cover bg-center" style={{ backgroundImage: 'url("https://example.com/your-background-image.jpg")' }}>
+      <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-full max-w-md bg-opacity-90 backdrop-blur-md">
         <h2 className="text-2xl font-bold mb-4">Business Form</h2>
         <div className="mb-4">
           <label htmlFor="name" className="block text-gray-700 mb-2">Name:</label>

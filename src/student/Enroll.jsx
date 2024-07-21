@@ -23,7 +23,7 @@ const StaticEnroll = () => {
     const { name, email, phone, referralCode } = formData;
     const courseTitle = 'Mastering React and Next.js';
     const message = `Hello, I would like to enroll in the course: ${courseTitle}. My details are Name: ${name}, Email: ${email}, Phone: ${phone}. Referral Code: ${referralCode}`;
-    const whatsappUrl = `https://wa.me/9959068980?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://api.whatsapp.com/send/?phone=9959068980&text=${encodeURIComponent(whatsappMessage)}&type=phone_number&app_absent=0`;
     window.open(whatsappUrl, '_blank');
   };
 
