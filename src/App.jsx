@@ -16,7 +16,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from './Authentication/AuthContext'; // Adjust path as needed
 import Video from './student/Video';
-
+import Teach from './student/Teach'; // Import the Teach component
+import BusinessForm from './student/BusinessForm';
 
 // AdminLayout component for protected routes
 const AdminLayout = ({ children }) => {
@@ -44,6 +45,9 @@ const App = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/video" element={<Video />} />
+          <Route path="/teach" element={<Teach />} />
+          <Route path="/BusinessForm" element={<BusinessForm />} />
+           {/* Add Teach route */}
           {/* Protected Admin Dashboard Routes */}
           <Route 
             path="/admin-dashboard" 

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { FaSearch, FaShoppingCart, FaBell, FaUserCircle, FaChevronDown, FaBars, FaTimes, FaSun, FaMoon } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
-
 const Navbar = ({ isDarkMode, toggleTheme }) => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -67,13 +66,13 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
         {/* Right Side Menu Items */}
         <div className="hidden md:flex items-center space-x-4">
           <button
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/BusinessForm')}
             className="hover:text-white focus:outline-none"
           >
             Learning Destiny Business
           </button>
           <button
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/teach')}
             className="hover:text-white focus:outline-none"
           >
             Teach on Learning Destiny
@@ -142,7 +141,7 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
             Learning Destiny Business
           </button>
           <button
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/teach')}
             className="text-gray-300 hover:text-white focus:outline-none mb-4"
           >
             Teach on Learning Destiny

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import Navbar from '../components/navbar'; // Ensure this path is correct
-import Footer from '../components/Footer'; // Ensure this path is correct
-import nestImage from '../assets/next.jpg'; // Adjust the path according to your project structure
 
-const StaticEnroll = () => {
+const Teach = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    referralCode: '',
+    subject: '',
+    experience: '',
+    qualifications: '',
+    referralCode: ''
   });
 
   const handleChange = (e) => {
@@ -20,16 +20,21 @@ const StaticEnroll = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { name, email, phone, referralCode } = formData;
-    const courseTitle = 'Mastering React and Next.js';
-    const message = `Hello, I would like to enroll in the course: ${courseTitle}. My details are Name: ${name}, Email: ${email}, Phone: ${phone}. Referral Code: ${referralCode}`;
+    const { name, email, phone, subject, experience, qualifications, referralCode } = formData;
+    const message = `Hello, I would like to apply to teach on your platform. Here are my details:
+    Name: ${name}
+    Email: ${email}
+    Phone: ${phone}
+    Subject: ${subject}
+    Experience: ${experience} years
+    Qualifications: ${qualifications}
+    Referral Code: ${referralCode || 'N/A'}`;
     const whatsappUrl = `https://wa.me/9959068980?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
 
   return (
     <div className="relative min-h-screen flex flex-col bg-white text-gray-800 font-body">
-      {/* Background Image */}
       <div
         className="absolute inset-0 -z-10 overflow-hidden"
         style={{
@@ -44,30 +49,15 @@ const StaticEnroll = () => {
         <section
           className="flex flex-col md:flex-row items-center md:items-start p-8 rounded-lg shadow-lg w-full max-w-6xl"
           style={{
-            backgroundColor: 'rgba(255, 255, 255, 0.9)', // Semi-transparent white background for the card
+            backgroundColor: 'rgba(255, 255, 255, 0.9)',
             backdropFilter: 'blur(5px)',
           }}
         >
-          <div className="md:w-1/2 md:pr-8 mb-8 md:mb-0">
-            <h1 className="text-4xl font-bold mb-4 text-gray-900">Mastering React and Next.js</h1>
+          <div className="md:w-full md:pr-8 mb-8 md:mb-0">
+            <h1 className="text-4xl font-bold mb-4 text-gray-900">Apply to Teach</h1>
             <p className="text-lg mb-6 text-gray-800">
-              Learn how to build high-performance web applications using React and Next.js. This course covers everything from the basics to advanced concepts, including server-side rendering, static site generation, and API routes.
+              If you're passionate about teaching and have expertise in your subject area, we invite you to join our platform and share your knowledge with our students.
             </p>
-            <p className="text-lg mb-4 text-gray-800"><strong>Instructor:</strong> Aditya</p>
-            <p className="text-lg mb-4 text-gray-800"><strong>Last Updated:</strong> 20th July 2024</p>
-            <p className="text-lg mb-4 text-gray-800"><strong>Duration:</strong> 2 hours</p>
-            <p className="text-lg mb-4 text-gray-800"><strong>Lectures:</strong> 120</p>
-            <p className="text-lg mb-4 text-gray-800"><strong>Level:</strong> Intermediate</p>
-            <p className="text-lg mb-4 text-gray-800"><strong>Price:</strong> FREE</p>
-            <p className="text-lg mb-4 text-gray-800"><strong>Highlights:</strong></p>
-            <ul className="list-disc list-inside mb-4 text-gray-800">
-              <li>Introduction to React</li>
-              <li>State Management with Redux</li>
-              <li>Server-side Rendering with Next.js</li>
-              <li>Static Site Generation</li>
-              <li>API Routes in Next.js</li>
-              <li>Deploying Next.js Apps</li>
-            </ul>
 
             <form onSubmit={handleSubmit} className="mt-8 bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
               <div className="mb-4">
@@ -107,6 +97,42 @@ const StaticEnroll = () => {
                 />
               </div>
               <div className="mb-4">
+                <label htmlFor="subject" className="block text-lg mb-2 text-gray-800">Subject</label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  className="w-full p-3 bg-white text-gray-800 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="experience" className="block text-lg mb-2 text-gray-800">Experience (in years)</label>
+                <input
+                  type="number"
+                  id="experience"
+                  name="experience"
+                  value={formData.experience}
+                  onChange={handleChange}
+                  className="w-full p-3 bg-white text-gray-800 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="qualifications" className="block text-lg mb-2 text-gray-800">Qualifications</label>
+                <textarea
+                  id="qualifications"
+                  name="qualifications"
+                  value={formData.qualifications}
+                  onChange={handleChange}
+                  className="w-full p-3 bg-white text-gray-800 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+                  rows="4"
+                  required
+                ></textarea>
+              </div>
+              <div className="mb-4">
                 <label htmlFor="referralCode" className="block text-lg mb-2 text-gray-800">Referral Code (optional)</label>
                 <input
                   type="text"
@@ -121,20 +147,14 @@ const StaticEnroll = () => {
                 type="submit"
                 className="py-3 px-6 font-semibold rounded-md bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-300"
               >
-                Register via WhatsApp
+                Apply via WhatsApp
               </button>
             </form>
           </div>
-
-          <div className="md:w-1/2 flex justify-center">
-            <img src={nestImage} alt="Mastering React and Next.js" className="w-full h-auto rounded-lg shadow-lg object-cover mb-4" />
-          </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 };
 
-export default StaticEnroll;
+export default Teach;
