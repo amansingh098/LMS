@@ -66,7 +66,7 @@ const Video = () => {
         <div className="w-full h-full relative rounded-lg overflow-hidden">
           <iframe
             className="w-full h-full absolute top-0 left-0 rounded-lg border border-gray-600"
-            src="https://www.youtube.com/embed/_uQrJ0TkZlc"
+            src=""
             title="Course Preview"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
