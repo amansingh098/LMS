@@ -56,9 +56,9 @@ const Home = ({ isDarkMode }) => {
       className={`relative z-10 border p-8 ${isDarkMode ? 'border-gray-700 bg-gray-800 bg-opacity-70' : 'border-gray-300 bg-gray-100 bg-opacity-70'}`}
       style={{ backdropFilter: 'blur(5px)' }}
     >
-      <h3 className="text-2xl font-bold mb-4 text-accent">Expand your career opportunities with Python</h3>
+      <h3 className="text-2xl font-bold mb-4 text-accent">Expand your career opportunities with React</h3>
       <p className="mb-4 max-w-3xl">
-        Take one of Learning Destiny range of Python courses and learn how to code using this incredibly useful language. Its simple syntax and readability makes Python perfect for Flask, Django, data science, and machine learning. You'll learn how to build everything from games to sites to apps.
+      Web development involves creating and maintaining websites, encompassing web design, web publishing, web programming, and database management. It enables the development of dynamic, interactive, and user-friendly web applications and services.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8">
@@ -79,7 +79,7 @@ const Home = ({ isDarkMode }) => {
                   <FaStar key={i} className={i < Math.round(course.rating) ? 'text-orange-400' : 'text-gray-600'} />
                 ))}
               </div>
-              <span className="text-xs ml-1">({course.ratingCount})</span>
+              <span className="text-xs ml-1">({course.ratingCount})5</span>
             </div>
             <p className="font-bold mt-1">{course.price}</p>
             {hoveredCourse === course.id && (

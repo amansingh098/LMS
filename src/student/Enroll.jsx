@@ -58,7 +58,7 @@ const StaticEnroll = () => {
             <p className="text-lg mb-4 text-gray-800"><strong>Duration:</strong> 2 hours</p>
             <p className="text-lg mb-4 text-gray-800"><strong>Lectures:</strong> 120</p>
             <p className="text-lg mb-4 text-gray-800"><strong>Level:</strong> Intermediate</p>
-            <p className="text-lg mb-4 text-gray-800"><strong>Price:</strong> FREE</p>
+            <p className="text-lg mb-4 text-gray-800"><strong>Price:</strong> 4999 Rs</p>
             <p className="text-lg mb-4 text-gray-800"><strong>Highlights:</strong></p>
             <ul className="list-disc list-inside mb-4 text-gray-800">
               <li>Introduction to React</li>
