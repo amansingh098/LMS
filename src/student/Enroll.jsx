@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Navbar from '../components/navbar'; // Ensure this path is correct
 import Footer from '../components/Footer'; // Ensure this path is correct
 import nestImage from '../assets/next.jpg'; // Adjust the path according to your project structure
-
 const StaticEnroll = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -23,7 +22,7 @@ const StaticEnroll = () => {
     const { name, email, phone, referralCode } = formData;
     const courseTitle = 'Mastering React and Next.js';
     const message = `Hello, I would like to enroll in the course: ${courseTitle}. My details are Name: ${name}, Email: ${email}, Phone: ${phone}. Referral Code: ${referralCode}`;
-    const whatsappUrl = `https://api.whatsapp.com/send/?phone=9959068980&text=${encodeURIComponent(whatsappMessage)}&type=phone_number&app_absent=0`;
+    const whatsappUrl = `https://api.whatsapp.com/send/?phone=9959068980&text=${encodeURIComponent(message)}&type=phone_number&app_absent=0`;
     window.open(whatsappUrl, '_blank');
   };
 
@@ -54,11 +53,11 @@ const StaticEnroll = () => {
               Learn how to build high-performance web applications using React and Next.js. This course covers everything from the basics to advanced concepts, including server-side rendering, static site generation, and API routes.
             </p>
             <p className="text-lg mb-4 text-gray-800"><strong>Instructor:</strong> Aditya</p>
-            <p className="text-lg mb-4 text-gray-800"><strong>Last Updated:</strong> 20th July 2024</p>
-            <p className="text-lg mb-4 text-gray-800"><strong>Duration:</strong> 2 hours</p>
+            <p className="text-lg mb-4 text-gray-800"><strong>Last Updated:</strong> 1 st July 2024</p>
+            <p className="text-lg mb-4 text-gray-800"><strong>Duration:</strong> 2 Months</p>
             <p className="text-lg mb-4 text-gray-800"><strong>Lectures:</strong> 120</p>
             <p className="text-lg mb-4 text-gray-800"><strong>Level:</strong> Intermediate</p>
-            <p className="text-lg mb-4 text-gray-800"><strong>Price:</strong> 6,999 Rs</p>
+            <p className="text-lg mb-4 text-gray-800"><strong>Price:</strong> 4,999 Rs</p>
             <p className="text-lg mb-4 text-gray-800"><strong>Highlights:</strong></p>
             <ul className="list-disc list-inside mb-4 text-gray-800">
               <li>Introduction to React</li>
@@ -119,7 +118,7 @@ const StaticEnroll = () => {
               </div>
               <button
                 type="submit"
-                className="py-3 px-6 font-semibold rounded-md bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-300"
+                className="py-3 px-6 font-semibold rounded-md bg-blue-600 text-white hover:bg-green-700 transition-colors duration-300"
               >
                 Register via WhatsApp
               </button>

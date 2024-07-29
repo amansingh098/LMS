@@ -78,4 +78,109 @@ const Video = () => {
   );
 };
 
-export default Video;
+const Roadmap = ({ handleRegister, registered }) => (
+  <div className="min-h-screen bg-gray-100 flex flex-col items-center py-12 text-black">
+    <h1 className="text-4xl font-bold mb-8">React.js Roadmap</h1>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl">
+      {/* Month 1 */}
+      <div className="p-6 bg-white rounded-lg shadow-lg">
+        <h2 className="text-2xl font-bold mb-4">Month 1</h2>
+        <div className="mb-4">
+          <h3 className="text-xl font-semibold">Week 1: Prerequisites</h3>
+          <ul className="list-disc list-inside">
+            <li>HTML Basics</li>
+            <li>CSS Basics</li>
+            <li>JavaScript Basics</li>
+          </ul>
+        </div>
+        <div className="mb-4">
+          <h3 className="text-xl font-semibold">Week 2: React Basics</h3>
+          <ul className="list-disc list-inside">
+            <li>Create React App</li>
+            <li>JSX (JavaScript Syntax Extension)</li>
+            <li>Props</li>
+            <li>Handling States / useState Hook</li>
+          </ul>
+        </div>
+        <div className="mb-4">
+          <h3 className="text-xl font-semibold">Week 3: React Basics (contd.)</h3>
+          <ul className="list-disc list-inside">
+            <li>Handling functions in React</li>
+            <li>Handling JSX events</li>
+            <li>Conditional Rendering</li>
+          </ul>
+        </div>
+        <div className="mb-4">
+          <h3 className="text-xl font-semibold">Week 4: React Basics (contd.)</h3>
+          <ul className="list-disc list-inside">
+            <li>setState and Component Life Cycle methods</li>
+            <li>Learn Building forms in React</li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Month 2 */}
+      <div className="p-6 bg-white rounded-lg shadow-lg">
+        <h2 className="text-2xl font-bold mb-4">Month 2</h2>
+        <div className="mb-4">
+          <h3 className="text-xl font-semibold">Week 1: Advanced Topics</h3>
+          <ul className="list-disc list-inside">
+            <li>Debugging and logging</li>
+            <li>Fetching & displaying data from external API</li>
+            <li>Browser's local storage</li>
+          </ul>
+        </div>
+        <div className="mb-4">
+          <h3 className="text-xl font-semibold">Week 2: Advanced Topics (contd.)</h3>
+          <ul className="list-disc list-inside">
+            <li>Handling errors in React</li>
+            <li>Commonly used React Hooks</li>
+          </ul>
+        </div>
+        <div className="mb-4">
+          <h3 className="text-xl font-semibold">Week 3: React Libraries</h3>
+          <ul className="list-disc list-inside">
+            <li>Axios - HTTP Requests</li>
+            <li>Redux - State Management</li>
+            <li>React Router - Routing</li>
+          </ul>
+        </div>
+        <div className="mb-4">
+          <h3 className="text-xl font-semibold">Week 4: React Libraries (contd.)</h3>
+          <ul className="list-disc list-inside">
+            <li>Styling UI libraries (Bootstrap, CSS, Tailwind, etc.)</li>
+            <li>Formik and React Hook Form</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    {!registered && (
+      <button
+        type="button"
+        onClick={handleRegister}
+        className="mt-6 py-2 px-4 font-semibold rounded-md bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-300"
+      >
+        Register to Unlock
+      </button>
+    )}
+  </div>
+);
+
+const CoursePage = () => {
+  const [registered, setRegistered] = React.useState(false);
+  const navigate = useNavigate();
+
+  const handleRegister = () => {
+    setRegistered(true);
+    navigate('/enroll');
+  };
+
+  return (
+    <div>
+      
+      <Roadmap handleRegister={handleRegister} registered={registered} />
+    </div>
+  );
+};
+
+export default CoursePage;
