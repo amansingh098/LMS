@@ -1,5 +1,6 @@
 import React from 'react';
-
+import Aboutus from '../Pages/Aboutus';
+import { Link } from 'react-router-dom';
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-gray-300 py-6">
@@ -9,7 +10,7 @@ const Footer = () => {
           <ul className="flex space-x-4">
             <li><a href="/" className="hover:text-white">Home</a></li>
             <li><a href="/" className="hover:text-white">Courses</a></li>
-            <li><a href="./Aboutus" className="hover:text-white">About Us</a></li>
+            <li><Link to="/Aboutus" className="hover:text-white">About Us</Link></li>
             <li><a href="/" className="hover:text-white">Contact</a></li>
           </ul>
         </div>
