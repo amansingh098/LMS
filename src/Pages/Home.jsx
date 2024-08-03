@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { courses as initialCourses, categories } from '../Data';
 import Navbar from '../components/navbar'; // Adjust path as necessary
 import Footer from '../components/Footer';
+import pic from '../assets/pic.png'
 
 const Home = ({ isDarkMode }) => {
   const [hoveredCourse, setHoveredCourse] = useState(null);
@@ -43,7 +44,7 @@ const Home = ({ isDarkMode }) => {
         >
           {/* Logo Section */}
           <div className="flex-shrink-0 mb-8 md:mb-0 md:mr-8">
-            <img src="./src/assets/pic.png" alt="Learning Destiny Logo" className="h-24 md:h-32" />
+            <img src={pic} alt="Learning Destiny Logo" className="h-24 md:h-32" />
           </div>
           {/* Text Section */}
           <div>
