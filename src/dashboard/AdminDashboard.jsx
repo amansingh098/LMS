@@ -8,12 +8,11 @@ import { useAuth } from '../Authentication/AuthContext'; // Import useAuth from 
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const [showSidebar, setShowSidebar] = useState(false);
-  const { logout, currentUser } = useAuth(); // Destructure logout function from useAuth
+  const { logout, currentUser, role } = useAuth(); // Destructure logout function from useAuth
   const handleNavigate = (path) => {
     navigate(path);
     closeSidebar();
   };
-
   const openSidebar = () => {
     setShowSidebar(true);
   };
@@ -173,14 +172,14 @@ const AdminDashboard = () => {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-6 overflow-y-auto">
+      <main className="flex-1 p-2 overflow-y-auto">
         {/* Navbar */}
-        <nav className="bg-gray-800 text-white py-4 px-6 flex items-center justify-between">
+        {/* <nav className="bg-gray-800 text-white py-4 px-6 flex items-center justify-between">
           <div className="text-2xl font-bold">Learning Destiny Courses Management</div>
-        </nav>
+        </nav> */}
 
         {/* Content Area */}
-        <div className="mt-2  shadow-lg">
+        <div className="shadow-lg">
           {/* Outlet for rendering nested routes */}
           <Outlet />
         </div>

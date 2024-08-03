@@ -7,8 +7,6 @@ import Navbar from "../components/navbar.jsx"; // Import Navbar if you have it, 
 import Footer from '../components/Footer';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-
 const backgroundImageUrl = 'https://static.vecteezy.com/system/resources/previews/004/461/779/non_2x/abstract-wavy-background-in-pastel-color-design-sweet-color-free-vector.jpg';
 
 const SignupPage = () => {
@@ -32,11 +30,12 @@ const SignupPage = () => {
       // Set user display name
       await updateProfile(user, { displayName: username });
 
-      // Create a document in the users collection
+      // Create a document in the users collection with role as "user"
       await setDoc(doc(firestore, 'users', user.uid), {
         userId: user.uid,
         username: username,
         email: email,
+        role: 'user', // Set the role field
         createdAt: new Date().toISOString()
       });
 

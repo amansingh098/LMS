@@ -1,151 +1,129 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { firestore } from '../firebase';
-import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
-import { useAuth } from '../Authentication/AuthContext';
-import ReactPlayer from 'react-player';
-
-// Importing FontAwesome icon for play button
+import { doc, getDoc } from 'firebase/firestore';
+import { firestore } from '../firebase'; // Replace with your Firebase config
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlayCircle } from '@fortawesome/free-solid-svg-icons';
 
 const CoursePreview = () => {
-  const { courseid } = useParams();
+  const { courseId } = useParams();
   const [course, setCourse] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [selectedChapter, setSelectedChapter] = useState(null);
-  const { currentUser } = useAuth();
+  const [selectedVideo, setSelectedVideo] = useState(null);
 
   useEffect(() => {
     const fetchCourseData = async () => {
       try {
-        const courseRef = doc(firestore, 'courses', courseid);
-        const courseSnap = await getDoc(courseRef);
-        
-        if (!courseSnap.exists()) {
-          console.log('No such document!');
-          setLoading(false);
-          return;
+        // Fetch course data
+        const courseDoc = await getDoc(doc(firestore, 'courses', courseId));
+        if (courseDoc.exists()) {
+          const courseData = courseDoc.data();
+          setCourse(courseData);
+
+          // Set the first video as the default selected video
+          if (courseData.chapters.length > 0 && courseData.chapters[0].videos.length > 0) {
+            setSelectedVideo(courseData.chapters[0].videos[0]);
+          }
+        } else {
+          console.log('No such course!');
         }
-
-        const courseData = courseSnap.data();
-
-        // Fetch chapters and their videos
-        const chaptersCollection = collection(courseRef, 'chapters');
-        const chaptersSnap = await getDocs(chaptersCollection);
-        const chaptersData = await Promise.all(chaptersSnap.docs.map(async chapterDoc => {
-          const chapterData = chapterDoc.data();
-          const videosCollection = collection(chapterDoc.ref, 'videos');
-          const videosSnap = await getDocs(videosCollection);
-          const videosData = videosSnap.docs.map(videoDoc => videoDoc.data());
-
-          return {
-            ...chapterData,
-            videos: videosData
-          };
-        }));
-
-        setCourse({
-          ...courseData,
-          chapters: chaptersData
-        });
-
       } catch (error) {
-        console.error('Error fetching course:', error);
-      } finally {
-        setLoading(false);
+        console.error('Error fetching course data:', error);
       }
     };
 
     fetchCourseData();
-  }, [courseid]);
-
-  // Function to handle chapter selection
-  const handleChapterSelect = (chapter) => {
-    setSelectedChapter(chapter);
-  };
-
-  if (loading) {
-    return <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">Loading...</div>;
-  }
+  }, [courseId]);
 
   if (!course) {
-    return <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">Course not found</div>;
+    return <div>Loading...</div>;
   }
 
+  const totalLectures = course.chapters.reduce((acc, chapter) => acc + chapter.videos.length, 0);
+  const totalLength = course.chapters.reduce((acc, chapter) => {
+    return acc + chapter.videos.reduce((vidAcc, video) => {
+      const duration = parseInt(video.duration || 0, 10);
+      return vidAcc + (isNaN(duration) ? 0 : duration);
+    }, 0);
+  }, 0);
+
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          {/* Video Player Section */}
-          <div className="lg:col-span-2">
-            <ReactPlayer
-              url={selectedChapter?.videos[0]?.videoLink || 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'}
-              width="100%"
-              height="480px"
-              controls={true}
-              className="rounded-lg overflow-hidden mb-8 lg:mb-0"
-            />
+    <div className="flex flex-row max-w-7xl mx-auto p-4 text-white bg-gray-900 space-x-6">
+      {/* Left Column: Video and Course Information */}
+      <div className="flex-1">
+        {/* Video Section */}
+        {selectedVideo ? (
+          <div className="relative bg-black h-96 mb-4">
+            <iframe
+              className="absolute top-0 left-0 w-full h-full"
+              src={selectedVideo.videoLink.replace("watch?v=", "embed/")}
+              title={selectedVideo.title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
           </div>
-          {/* Course Details Section */}
-          <div className="lg:col-span-1">
-            <div className="bg-gray-800 p-4 rounded-lg shadow-lg mb-8">
-              <h2 className="text-2xl font-bold">Course Details</h2>
-              <p className="text-gray-400 mt-2">Price: ${course.price?.toFixed(2) || 'N/A'}</p>
-              <button className="mt-4 w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded focus:outline-none">
-                Enroll Now
-              </button>
-            </div>
-            {/* Chapters Section */}
-            <div>
-              <h2 className="text-2xl font-bold mb-6">Chapters</h2>
-              {course.chapters && course.chapters.length > 0 ? (
-                <div className="grid grid-cols-1 gap-6">
-                  {course.chapters.map((chapter, index) => (
-                    <div key={index} className="bg-gray-800 p-4 rounded-lg shadow-lg cursor-pointer transition duration-300 ease-in-out transform hover:scale-105">
-                      <h3
-                        className="text-xl font-bold mb-2 flex items-center cursor-pointer"
-                        onClick={() => handleChapterSelect(chapter)}
-                      >
-                        Chapter {index + 1}: {chapter.title}
-                      </h3>
-                      {selectedChapter === chapter && (
-                        <ul className="space-y-2">
-                          {chapter.videos && chapter.videos.length > 0 ? (
-                            chapter.videos.map((video, vidIndex) => (
-                              <li key={vidIndex} className="text-gray-400">
-                                <a href={video.videoLink} target="_blank" rel="noopener noreferrer">
-                                  <FontAwesomeIcon icon={faPlayCircle} className="text-blue-500 mr-2" />
-                                  {video.title}
-                                </a>
-                              </li>
-                            ))
-                          ) : (
-                            <p className="text-gray-400">No videos available</p>
-                          )}
-                        </ul>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-gray-400 mt-2">No chapters available</p>
-              )}
-            </div>
-            
+        ) : (
+          <div className="relative bg-black h-96 mb-4 flex items-center justify-center">
+            <p className="text-white">No video available</p>
+          </div>
+        )}
+
+        {/* Course Information */}
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold mb-2">{course.title || "Course Title"}</h1>
+          <div className="flex items-center space-x-2 text-gray-400 mb-4">
+            <span className="flex items-center text-yellow-400 font-semibold">{course.rating || "4.4"}</span>
+            <span>({course.numRatings || "N/A"} ratings)</span>
+            <span>{course.students || "N/A"} students</span>
+            <span>{totalLength} minutes total length</span>
+          </div>
+          <div className="text-gray-400 text-sm">
+            <p>Last updated {course.createdAt.toDate().toLocaleDateString() || "Date"}</p>
+            <p>{course.language || "English"}, {course.subtitles || "English [Auto]"}</p>
           </div>
         </div>
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">{course.title}</h1>
-          <p className="text-lg text-gray-300">{course.description}</p>
-          <div className="flex items-center mt-4">
-            <img
-              src={currentUser?.photoURL || 'https://source.unsplash.com/40x40/?profile'}
-              alt={currentUser?.displayName || 'Instructor'}
-              className="w-10 h-10 rounded-full mr-2"
-            />
-            <span className="text-gray-400">{currentUser?.displayName || 'Instructor'}</span>
+
+        {/* Schedule Learning Time */}
+        <div className="mb-6 p-4 bg-gray-800 rounded">
+          <h2 className="text-lg font-semibold mb-2">Schedule learning time</h2>
+          <p className="text-gray-400 mb-4">Learning a little each day adds up. Research shows that students who make learning a habit are more likely to reach their goals. Set time aside to learn and get reminders using your learning scheduler.</p>
+          <div className="flex space-x-4">
+            <button className="bg-purple-600 text-white px-4 py-2 rounded">Get started</button>
+            <button className="text-gray-400 hover:text-white">Dismiss</button>
           </div>
+        </div>
+      </div>
+
+      {/* Right Column: Course Content */}
+      <div className="w-1/3 bg-gray-800 rounded p-4">
+        <h2 className="text-xl font-semibold mb-4">Course content</h2>
+        <div className="flex justify-between text-gray-400 mb-2">
+          <div className="flex items-center">
+            <span className="mr-4">{course.chapters.length} sections</span>
+            <span>{totalLectures} lectures</span>
+          </div>
+          <span>{totalLength} minutes total length</span>
+        </div>
+        <div className="border-t border-gray-700 pt-4">
+          {course.chapters.map((chapter, index) => (
+            <details key={index} className="mb-4">
+              <summary className="cursor-pointer font-medium text-lg mb-2">{chapter.title || `Section ${index + 1}`}</summary>
+              <ul className="list-none space-y-2 pl-4">
+                {chapter.videos.map((video, videoIndex) => (
+                  <li
+                    key={videoIndex}
+                    className="flex items-center justify-between cursor-pointer"
+                    onClick={() => setSelectedVideo(video)}
+                  >
+                    <div className="flex items-center">
+                      <FontAwesomeIcon icon={faPlayCircle} className="mr-2" />
+                      <span>{video.title || `Video ${videoIndex + 1}`}</span>
+                    </div>
+                    <span>{video.duration ? `${video.duration} min` : 'N/A'}</span>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          ))}
         </div>
       </div>
     </div>

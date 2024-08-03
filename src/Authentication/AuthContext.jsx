@@ -9,15 +9,30 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
+  const [role, setRole] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
+    const unsubscribe = auth.onAuthStateChanged(async user => {
+      setLoading(true);
       if (user) {
         setCurrentUser(user);
         console.log('Current User:', user); 
+        try {
+          const userDoc = await firestore.collection('users').doc(user.uid).get();
+          if (userDoc.exists) {
+            const userData = userDoc.data();
+            setRole(userData.role || 'user'); // Set a default role if none exists
+          } else {
+            setRole('user'); // Default role if no document is found
+          }
+        } catch (error) {
+          console.error('Error fetching user role:', error);
+          setRole('user'); // Default role on error
+        }
       } else {
-        setCurrentUser(null); // Ensure currentUser is explicitly set to null on logout or if no user is authenticated
+        setCurrentUser(null);
+        setRole(null); // Reset role to null if no user is authenticated
       }
       setLoading(false);
     });
@@ -40,8 +55,8 @@ export function AuthProvider({ children }) {
     try {
       await firestore.collection('users').doc(user.uid).set({
         username: username,
-        email: user.email
-        // You can add more fields as needed
+        email: user.email,
+        role: 'user' // Assign default role
       });
     } catch (error) {
       console.error('Error creating user document:', error);
@@ -59,6 +74,7 @@ export function AuthProvider({ children }) {
 
   const value = {
     currentUser,
+    role,
     signup,
     login,
     logout

@@ -112,30 +112,17 @@ const AddCourses = () => {
     e.preventDefault();
 
     try {
-      const courseRef = await addDoc(collection(firestore, 'courses'), {
+      // Add course document to 'courses' collection
+      await addDoc(collection(firestore, 'courses'), {
         title: course.title,
         description: course.description,
         category: course.category,
         price: parseFloat(course.price),
         coverImage: course.coverImage,
+        chapters: course.chapters,
         accessSettings: course.accessSettings,
         createdAt: serverTimestamp()
       });
-
-      for (const chapter of course.chapters) {
-        const chapterRef = await addDoc(collection(courseRef, 'chapters'), {
-          title: chapter.title,
-          createdAt: serverTimestamp()
-        });
-
-        for (const video of chapter.videos) {
-          await addDoc(collection(chapterRef, 'videos'), {
-            title: video.title,
-            videoLink: video.videoLink,
-            createdAt: serverTimestamp()
-          });
-        }
-      }
 
       console.log('Course added successfully!');
       setCourse({
@@ -151,10 +138,12 @@ const AddCourses = () => {
         }
       });
 
+      // Fetch updated list of courses
       const courseCollection = await getDocs(collection(firestore, 'courses'));
       const courseList = courseCollection.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setCourses(courseList);
 
+      // Calculate enrollments and earnings
       let totalEarnings = 0;
       const enrollmentsData = {};
       for (const course of courseList) {
