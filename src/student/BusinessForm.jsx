@@ -21,7 +21,7 @@ const BusinessForm = () => {
 
     // Generate WhatsApp link
     const whatsappMessage = `Hello, my name is ${name}. My email is ${email}. Here is my message: ${message}`;
-    const whatsappLink = `https://api.whatsapp.com/send/?phone=9959068980&text=${encodeURIComponent(whatsappMessage)}&type=phone_number&app_absent=0`;
+    const whatsappLink = `https://api.whatsapp.com/send/?phone=9059898900&text=${encodeURIComponent(whatsappMessage)}&type=phone_number&app_absent=0`;
 
     // Redirect to WhatsApp
     window.location.href = whatsappLink;

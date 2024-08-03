@@ -29,7 +29,7 @@ const Teach = () => {
     Experience: ${experience} years
     Qualifications: ${qualifications}
     Referral Code: ${referralCode || 'N/A'}`;
-    const whatsappUrl = `https://wa.me/9959068980?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/9059898900?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
 

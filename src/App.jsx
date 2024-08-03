@@ -18,6 +18,7 @@ import { useAuth } from './Authentication/AuthContext'; // Adjust path as needed
 import Video from './student/Video';
 import Teach from './student/Teach'; // Import the Teach component
 import BusinessForm from './student/BusinessForm';
+import Aboutus from './Pages/Aboutus';
 
 // AdminLayout component for protected routes
 const AdminLayout = ({ children }) => {
@@ -47,6 +48,7 @@ const App = () => {
           <Route path="/video" element={<Video />} />
           <Route path="/teach" element={<Teach />} />
           <Route path="/BusinessForm" element={<BusinessForm />} />
+          <Route path="/Aboutus" element={<Aboutus />} />
            {/* Add Teach route */}
           {/* Protected Admin Dashboard Routes */}
           <Route 

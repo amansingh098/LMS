@@ -26,7 +26,7 @@ export const cour = [
 export const courses = [
   {
     id: 1,
-    title: "React Next.js",
+    title: "Full Stack",
     instructor: "Aditya Singh",
     rating: 4.5,
     price: "4,999 Rs",
