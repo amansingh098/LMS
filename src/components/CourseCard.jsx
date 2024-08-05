@@ -34,7 +34,7 @@ const CourseCard = ({ course, currentUser }) => {
               alt={currentUser?.displayName || 'Instructor'} 
               className="w-8 h-8 rounded-full" 
             />
-            <span className="text-gray-300 text-sm ml-2">{currentUser?.displayName || 'Instructor'}</span>
+            <span className="text-gray-300 text-sm ml-2">{course.instructorName || 'Instructor'}</span>
           </div>
           <div className="text-gray-300 text-sm ml-2">
             ${course.price?.toFixed(2) || 'N/A'}

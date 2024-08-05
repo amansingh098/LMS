@@ -122,7 +122,8 @@ const AddCourses = () => {
   
       // Add course document to 'courses' collection
       await addDoc(collection(firestore, 'courses'), {
-        userId: currentUser.uid, // Add the current user's ID
+        instructorId: currentUser.uid, // Add the current user's ID
+        instructorName: currentUser.displayName, // Add the current user's display name as instructorId
         title: course.title,
         description: course.description,
         category: course.category,
@@ -167,6 +168,7 @@ const AddCourses = () => {
       console.error('Error adding course:', error);
     }
   };
+  
   
 
   const deleteCourse = async (courseId) => {
