@@ -4,11 +4,13 @@ import { addDoc, collection, serverTimestamp, deleteDoc, doc, getDocs } from 'fi
 import { firestore } from '../firebase'; // Import firestore from your Firebase config
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend } from 'chart.js';
+import {useAuth} from '../Authentication/AuthContext'
 
 // Register Chart.js components
 ChartJS.register(BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
 
 const AddCourses = () => {
+  const {currentUser} = useAuth();
   const [course, setCourse] = useState({
     title: '',
     description: '',
@@ -110,10 +112,17 @@ const AddCourses = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
+      // Ensure that currentUser is defined and has an ID
+      if (!currentUser || !currentUser.uid) {
+        console.error('No current user logged in.');
+        return;
+      }
+  
       // Add course document to 'courses' collection
       await addDoc(collection(firestore, 'courses'), {
+        userId: currentUser.uid, // Add the current user's ID
         title: course.title,
         description: course.description,
         category: course.category,
@@ -123,7 +132,7 @@ const AddCourses = () => {
         accessSettings: course.accessSettings,
         createdAt: serverTimestamp()
       });
-
+  
       console.log('Course added successfully!');
       setCourse({
         title: '',
@@ -137,12 +146,12 @@ const AddCourses = () => {
           deny: []
         }
       });
-
+  
       // Fetch updated list of courses
       const courseCollection = await getDocs(collection(firestore, 'courses'));
       const courseList = courseCollection.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setCourses(courseList);
-
+  
       // Calculate enrollments and earnings
       let totalEarnings = 0;
       const enrollmentsData = {};
@@ -153,11 +162,12 @@ const AddCourses = () => {
       }
       setEnrollments(enrollmentsData);
       setTotalEarnings(totalEarnings);
-
+  
     } catch (error) {
       console.error('Error adding course:', error);
     }
   };
+  
 
   const deleteCourse = async (courseId) => {
     try {

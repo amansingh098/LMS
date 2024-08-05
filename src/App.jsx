@@ -19,6 +19,7 @@ import Video from './student/Video';
 import Teach from './student/Teach'; // Import the Teach component
 import BusinessForm from './student/BusinessForm';
 import Aboutus from './Pages/Aboutus';
+import MyCourses from './dashboard/MyCourses';
 
 // AdminLayout component for protected routes
 const AdminLayout = ({ children }) => {
@@ -62,6 +63,7 @@ const App = () => {
             <Route path="addCourses" element={<AddCourses />} />
             <Route path="allCourses" element={<AllCourses />} />
             <Route path="course/:courseId" element={<CoursePreview />} />
+            <Route path="myCourses" element={<MyCourses/>}/>
             <Route path="students" element={<Students />} />
             <Route path="analytics" element={<Analytics />} />
             <Route path="settings" element={<Settings />} />

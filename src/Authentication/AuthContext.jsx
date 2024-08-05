@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { auth, firestore } from '../firebase'; // Assuming firestore is imported from firebase
-
+import { collection, doc, getDoc } from 'firebase/firestore';
 const AuthContext = React.createContext();
 
 export function useAuth() {
@@ -19,8 +19,9 @@ export function AuthProvider({ children }) {
         setCurrentUser(user);
         console.log('Current User:', user); 
         try {
-          const userDoc = await firestore.collection('users').doc(user.uid).get();
-          if (userDoc.exists) {
+          const userDocRef = doc(firestore, 'users', user.uid);
+          const userDoc = await getDoc(userDocRef);
+          if (userDoc.exists()) {
             const userData = userDoc.data();
             setRole(userData.role || 'user'); // Set a default role if none exists
           } else {
@@ -39,7 +40,6 @@ export function AuthProvider({ children }) {
 
     return unsubscribe;
   }, []);
-
   async function signup(email, password, username) {
     try {
       const credential = await auth.createUserWithEmailAndPassword(email, password);
