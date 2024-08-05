@@ -1,50 +1,45 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import testing from '../assets/testing.png'
+import { FaTrashAlt, FaEdit } from 'react-icons/fa';
 
-const CourseCard = ({ course, currentUser }) => {
-  const navigate = useNavigate();
-
-  const handleEnrollClick = () => {
-    navigate(`/admin-dashboard/course/${course.id}`);
-  };
-
+const CourseCard = ({ course, onDelete, onEdit }) => {
   return (
-    <div 
-      className="bg-gray-800 rounded-lg shadow-lg overflow-hidden"
-      style={{
-        // backgroundImage: `url('https://static.vecteezy.com/system/resources/previews/029/887/892/non_2x/colorful-gradients-modern-and-clean-background-free-vector.jpg')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        color: 'white',
-      }}
-    >
-      <img 
-        src={course.imageUrl || testing} 
-        alt={course.title} 
-        className="w-full h-48 object-cover" 
+    <div className="bg-gray-900 rounded-md shadow-md overflow-hidden relative flex flex-col">
+      <img
+        src={course.coverImage || 'https://source.unsplash.com/400x200/?course'}
+        alt={course.title}
+        className="w-full h-32 object-cover"
       />
-      <div className="p-4">
-        <h2 className="text-xl font-bold text-white">{course.title}</h2>
-        <p className="text-gray-400 mt-2">{course.description}</p>
-        <div className="flex justify-between items-center mt-4">
+      <div className="p-3 flex flex-col justify-between flex-grow">
+        <div>
+          <h2 className="text-lg font-semibold text-white">{course.title}</h2>
+          <p className="text-sm text-gray-400 mt-1 line-clamp-2">{course.description}</p>
+        </div>
+        <div className="flex justify-between items-center mt-3">
           <div className="flex items-center">
-            <img 
-              src={currentUser?.photoURL || 'https://source.unsplash.com/40x40/?profile'} 
-              alt={currentUser?.displayName || 'Instructor'} 
-              className="w-8 h-8 rounded-full" 
+            <img
+              src={course.instructorPhotoURL || 'https://source.unsplash.com/32x32/?person'}
+              alt={course.instructorName || 'Instructor'}
+              className="w-6 h-6 rounded-full"
             />
-            <span className="text-gray-300 text-sm ml-2">{course.instructorName || 'Instructor'}</span>
+            <span className="text-gray-300 text-xs ml-2">{course.instructorName || 'Instructor'}</span>
           </div>
-          <div className="text-gray-300 text-sm ml-2">
-            ${course.price?.toFixed(2) || 'N/A'}
+          <div className="text-gray-300 text-xs">
+            ${course.price ? course.price.toFixed(2) : 'Free'}
           </div>
         </div>
+      </div>
+      <div className="absolute top-2 right-2 flex space-x-1">
         <button
-          onClick={handleEnrollClick}
-          className="mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded focus:outline-none"
+          onClick={onEdit}
+          className="text-blue-500 hover:text-blue-700 focus:outline-none"
         >
-          Enroll Now
+          <FaEdit size={14} />
+        </button>
+        <button
+          onClick={onDelete}
+          className="text-red-500 hover:text-red-700 focus:outline-none"
+        >
+          <FaTrashAlt size={14} />
         </button>
       </div>
     </div>

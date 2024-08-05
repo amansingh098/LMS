@@ -20,6 +20,7 @@ import Teach from './student/Teach'; // Import the Teach component
 import BusinessForm from './student/BusinessForm';
 import Aboutus from './Pages/Aboutus';
 import MyCourses from './dashboard/MyCourses';
+import UserDashboard from './dashboard/AdminDashboard';
 
 // AdminLayout component for protected routes
 const AdminLayout = ({ children }) => {
@@ -56,7 +57,7 @@ const App = () => {
             path="/admin-dashboard" 
             element={
               <AdminLayout>
-                <AdminDashboard />
+                <UserDashboard />
               </AdminLayout>
             }
           >

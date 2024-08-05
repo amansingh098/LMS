@@ -11,6 +11,7 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [role, setRole] = useState(null);
   const [loading, setLoading] = useState(true);
+  const[user,setUser] = useState()
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async user => {
@@ -23,6 +24,7 @@ export function AuthProvider({ children }) {
           const userDoc = await getDoc(userDocRef);
           if (userDoc.exists()) {
             const userData = userDoc.data();
+            setUser(userData || 'undefined')
             setRole(userData.role || 'user'); // Set a default role if none exists
           } else {
             setRole('user'); // Default role if no document is found
@@ -75,6 +77,7 @@ export function AuthProvider({ children }) {
   const value = {
     currentUser,
     role,
+    user,
     signup,
     login,
     logout
