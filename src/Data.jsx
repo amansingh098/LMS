@@ -29,7 +29,7 @@ export const courses = [
     title: "Full Stack",
     instructor: "Aditya Singh",
     rating: 4.5,
-    price: "4,999 Rs",
+    price: "6,999 Rs",
     imageUrl: "https://i.ytimg.com/vi/T3iLrmO8TmY/maxresdefault.jpg",
     lastUpdated: "June 2024",
     duration: "80 hours",

@@ -153,6 +153,22 @@ const Roadmap = ({ handleRegister, registered }) => (
           </ul>
         </div>
       </div>
+
+      {/* Month 3 */}
+      <div className="p-6 bg-white rounded-lg shadow-lg">
+        <h2 className="text-2xl font-bold mb-4">Month 3</h2>
+        <div className="mb-4">
+          <h3 className="text-xl font-semibold">Project Assignment</h3>
+          <p>Throughout this month, you will work on a comprehensive project that will encompass all the topics covered in the previous months. This project will include:</p>
+          <ul className="list-disc list-inside mt-2">
+            <li>Developing a full-fledged React application</li>
+            <li>Implementing state management with Redux</li>
+            <li>Utilizing React Router for navigation</li>
+            <li>Fetching and displaying data from APIs</li>
+          </ul>
+          <p className="mt-4">You will be guided by a mentor who will provide feedback and assistance as you progress. This is an excellent opportunity to solidify your skills and create a project for your portfolio.</p>
+        </div>
+      </div>
     </div>
     {!registered && (
       <button
@@ -177,7 +193,6 @@ const CoursePage = () => {
 
   return (
     <div>
-      
       <Roadmap handleRegister={handleRegister} registered={registered} />
     </div>
   );

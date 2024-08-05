@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { courses as initialCourses, categories } from '../Data';
 import Navbar from '../components/navbar'; // Adjust path as necessary
 import Footer from '../components/Footer';
-import pic from '../assets/pic.png'
+import pic from '../assets/pic.png';
 
 const Home = ({ isDarkMode }) => {
   const [hoveredCourse, setHoveredCourse] = useState(null);
@@ -32,9 +32,9 @@ const Home = ({ isDarkMode }) => {
 
   return (
     <div className={`${isDarkMode ? 'bg-gray-900 text-gray-200' : 'bg-white text-black'} font-body`}>
-      <main className="container mx-auto py-2 px-8">
+      <main className="container mx-auto py-2 px-4 md:px-8">
         <section
-          className="flex flex-col md:flex-row items-center justify-center md:justify-start text-center md:text-left py-32 px-8"
+          className="flex flex-col md:flex-row items-center justify-center md:justify-start text-center md:text-left py-16 md:py-32"
           style={{
             backgroundImage: `url(https://1vvan.github.io/blinqpay/images/top-block/background-top.png)`,
             backgroundSize: 'cover',
@@ -43,31 +43,32 @@ const Home = ({ isDarkMode }) => {
           }}
         >
           {/* Logo Section */}
-          <div className="flex-shrink-0 mb-8 md:mb-0 md:mr-8">
-            <img src={pic} alt="Learning Destiny Logo" className="h-24 md:h-32" />
+          <div className="flex-shrink-0 mb-6 md:mb-0 md:mr-8">
+            <img src={pic} alt="Learning Destiny Logo" className="h-16 md:h-32" />
           </div>
           {/* Text Section */}
           <div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">A Broad Selection of Courses</h1>
-            <p className="text-lg md:text-2xl mb-6 max-w-3xl">
+            <h1 className="text-3xl md:text-6xl font-bold mb-4">A Broad Selection of Courses</h1>
+            <p className="text-base md:text-2xl mb-6 max-w-xl md:max-w-3xl mx-auto">
               Choose from over 10,000 online video courses with new additions published every month. Learning Destiny offers courses covering a wide range of topics, including web development, data science, business, design, marketing, and more. Whether you're a beginner looking to learn the basics or an expert seeking advanced skills, our platform has something for everyone.
             </p>
-            <div className="flex flex-wrap justify-center md:justify-start mb-8">
-              {categories.slice(0, 5).map((category, index) => (
-                <button
-                  key={index}
-                  className="text-sm font-semibold py-2 px-4 rounded mb-2 mr-2 bg-blue-500 hover:bg-blue-600 text-white"
-                >
-                  {category.name}
-                </button>
-              ))}
-            </div>
+            <div className="flex flex-wrap justify-center md:justify-start mb-8 space-x-2">
+  {categories.slice(0, 5).map((category, index) => (
+    <button
+      key={index}
+      className="text-sm font-semibold py-2 px-4 rounded bg-blue-500 hover:bg-blue-600 text-white shadow-md hover:shadow-lg hover:shadow-orange-500/50 transition-all duration-300"
+    >
+      {category.name}
+    </button>
+  ))}
+</div>
+
           </div>
         </section>
 
         <section className="mb-16">
           <div
-            className="relative p-8"
+            className="relative p-4 md:p-8"
             style={{
               backgroundImage: `url('https://www.washingtonpost.com/brand-studio/leidos/inside-the-cyber-trenches/media/hero-curtain.png')`,
               backgroundSize: 'cover',
@@ -76,15 +77,15 @@ const Home = ({ isDarkMode }) => {
             }}
           >
             <div
-              className={`relative z-10 border p-8 ${isDarkMode ? 'border-gray-700 bg-gray-800 bg-opacity-70' : 'border-gray-300 bg-gray-100 bg-opacity-70'}`}
+              className={`relative z-10 border p-4 md:p-8 ${isDarkMode ? 'border-gray-700 bg-gray-800 bg-opacity-70' : 'border-gray-300 bg-gray-100 bg-opacity-70'}`}
               style={{ backdropFilter: 'blur(5px)' }}
             >
-              <h3 className="text-2xl font-bold mb-4 text-accent">Expand your career opportunities with React</h3>
-              <p className="mb-4 max-w-3xl">
+              <h3 className="text-xl md:text-2xl font-bold mb-4 text-accent">Expand your career opportunities with React</h3>
+              <p className="mb-4 max-w-xl md:max-w-3xl">
                 Web development involves creating and maintaining websites, encompassing web design, web publishing, web programming, and database management. It enables the development of dynamic, interactive, and user-friendly web applications and services.
               </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-8">
                 {courses.slice(0, 4).map(course => (
                   <div
                     key={course.id}

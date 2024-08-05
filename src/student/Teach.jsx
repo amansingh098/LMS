@@ -85,7 +85,7 @@ const Teach = () => {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="phone" className="block text-lg mb-2 text-gray-800">Phone</label>
+                <label htmlFor="number" className="block text-lg mb-2 text-gray-800">Phone</label>
                 <input
                   type="text"
                   id="phone"

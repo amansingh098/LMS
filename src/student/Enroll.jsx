@@ -54,10 +54,10 @@ const StaticEnroll = () => {
             </p>
             <p className="text-lg mb-4 text-gray-800"><strong>Instructor:</strong> Aditya</p>
             <p className="text-lg mb-4 text-gray-800"><strong>Last Updated:</strong> 1 st July 2024</p>
-            <p className="text-lg mb-4 text-gray-800"><strong>Duration:</strong> 2 Months</p>
+            <p className="text-lg mb-4 text-gray-800"><strong>Duration:</strong> 3 Months</p>
             <p className="text-lg mb-4 text-gray-800"><strong>Lectures:</strong> 120</p>
             <p className="text-lg mb-4 text-gray-800"><strong>Level:</strong> Basic</p>
-            <p className="text-lg mb-4 text-gray-800"><strong>Price:</strong> 4,999 Rs</p>
+            <p className="text-lg mb-4 text-gray-800"><strong>Price:</strong> 6,999 Rs</p>
             <p className="text-lg mb-4 text-gray-800"><strong>Highlights:</strong></p>
             <ul className="list-disc list-inside mb-4 text-gray-800">
               <li>Introduction to React</li>
