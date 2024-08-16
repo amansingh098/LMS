@@ -10,16 +10,19 @@ import Students from './dashboard/Students';
 import Analytics from './dashboard/Analytics';
 import Settings from './dashboard/Settings';
 import CoursePreview from './dashboard/CoursePreview';
-import Enroll from './student/Enroll';
+import MyCourses from './dashboard/MyCourses';
+
 import Navbar from './components/navbar'; // Adjust path as necessary
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from './Authentication/AuthContext'; // Adjust path as needed
-import Video from './student/Video';
+
 import Teach from './student/Teach'; // Import the Teach component
 import BusinessForm from './student/BusinessForm';
 import Aboutus from './Pages/Aboutus';
-import MyCourses from './dashboard/MyCourses';
+import CategoryPage from './enrollpages/CategoryPage';
+import CourseDetails from './enrollpages/CourseDetails';
+import StaticEnroll from './student/StaticEnroll';
 
 // AdminLayout component for protected routes
 const AdminLayout = ({ children }) => {
@@ -43,14 +46,16 @@ const App = () => {
         <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
         <Routes>
           <Route path="/" element={<Home isDarkMode={isDarkMode} />} />
-          <Route path="/enroll" element={<Enroll />} />
+          <Route path="/category/:categoryName" element={<CategoryPage />} />
+          <Route path="/enroll/:courseId" element={<CourseDetails />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
-          <Route path="/video" element={<Video />} />
+          <Route path="/enroll/:courseId" element={<StaticEnroll />} />
+
           <Route path="/teach" element={<Teach />} />
-          <Route path="/BusinessForm" element={<BusinessForm />} />
-          <Route path="/Aboutus" element={<Aboutus />} />
-           {/* Add Teach route */}
+          <Route path="/businessForm" element={<BusinessForm />} />
+          <Route path="/aboutus" element={<Aboutus />} />
+
           {/* Protected Admin Dashboard Routes */}
           <Route 
             path="/admin-dashboard" 
@@ -63,7 +68,7 @@ const App = () => {
             <Route path="addCourses" element={<AddCourses />} />
             <Route path="allCourses" element={<AllCourses />} />
             <Route path="course/:courseId" element={<CoursePreview />} />
-            <Route path="myCourses" element={<MyCourses/>}/>
+            <Route path="myCourses" element={<MyCourses />} />
             <Route path="students" element={<Students />} />
             <Route path="analytics" element={<Analytics />} />
             <Route path="settings" element={<Settings />} />

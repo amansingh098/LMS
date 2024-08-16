@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import Navbar from '../components/navbar'; // Ensure this path is correct
-import Footer from '../components/Footer'; // Ensure this path is correct
-import nestImage from '../assets/next.jpg'; // Adjust the path according to your project structure
+import { useParams } from 'react-router-dom';
+import { courses } from '../Data';
+import Footer from '../components/Footer';
+
 const StaticEnroll = () => {
+  const { courseId } = useParams();
+  const course = courses.find(c => c.id === Number(courseId));
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -20,52 +24,42 @@ const StaticEnroll = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const { name, email, phone, referralCode } = formData;
-    const courseTitle = 'Mastering React and Next.js';
+    const courseTitle = course.title;
     const message = `Hello, I would like to enroll in the course: ${courseTitle}. My details are Name: ${name}, Email: ${email}, Phone: ${phone}. Referral Code: ${referralCode}`;
     const whatsappUrl = `https://api.whatsapp.com/send/?phone=9059898900&text=${encodeURIComponent(message)}&type=phone_number&app_absent=0`;
     window.open(whatsappUrl, '_blank');
   };
 
+  if (!course) {
+    return <div>Course not found</div>;
+  }
+
   return (
     <div className="relative min-h-screen flex flex-col bg-white text-gray-800 font-body">
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 -z-10 overflow-hidden"
-        style={{
-          backgroundImage: "url('https://static.vecteezy.com/system/resources/thumbnails/009/382/864/small/comic-zoom-focus-lines-background-free-vector.jpg')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          filter: 'blur(8px)',
-        }}
-      ></div>
-
       <main className="container mx-auto py-16 px-8 flex flex-col items-center relative z-10">
         <section
           className="flex flex-col md:flex-row items-center md:items-start p-8 rounded-lg shadow-lg w-full max-w-6xl"
           style={{
-            backgroundColor: 'rgba(255, 255, 255, 0.9)', // Semi-transparent white background for the card
+            backgroundColor: 'rgba(255, 255, 255, 0.9)',
             backdropFilter: 'blur(5px)',
           }}
         >
           <div className="md:w-1/2 md:pr-8 mb-8 md:mb-0">
-            <h1 className="text-4xl font-bold mb-4 text-gray-900">Mastering React and Next.js</h1>
+            <h1 className="text-4xl font-bold mb-4 text-gray-900">{course.title}</h1>
             <p className="text-lg mb-6 text-gray-800">
-              Learn how to build high-performance web applications using React and Next.js. This course covers everything from the basics to advanced concepts, including server-side rendering, static site generation, and API routes.
+              {course.description}
             </p>
-            <p className="text-lg mb-4 text-gray-800"><strong>Instructor:</strong> Aditya</p>
-            <p className="text-lg mb-4 text-gray-800"><strong>Last Updated:</strong> 1 st July 2024</p>
-            <p className="text-lg mb-4 text-gray-800"><strong>Duration:</strong> 3 Months</p>
-            <p className="text-lg mb-4 text-gray-800"><strong>Lectures:</strong> 120</p>
+            <p className="text-lg mb-4 text-gray-800"><strong>Instructor:</strong> {course.instructor}</p>
+            <p className="text-lg mb-4 text-gray-800"><strong>Last Updated:</strong> {course.lastUpdated}</p>
+            <p className="text-lg mb-4 text-gray-800"><strong>Duration:</strong> {course.duration}</p>
+            <p className="text-lg mb-4 text-gray-800"><strong>Lectures:</strong> {course.lectureCount}</p>
             <p className="text-lg mb-4 text-gray-800"><strong>Level:</strong> Basic</p>
-            <p className="text-lg mb-4 text-gray-800"><strong>Price:</strong> 6,999 Rs</p>
+            <p className="text-lg mb-4 text-gray-800"><strong>Price:</strong> {course.price}</p>
             <p className="text-lg mb-4 text-gray-800"><strong>Highlights:</strong></p>
             <ul className="list-disc list-inside mb-4 text-gray-800">
-              <li>Introduction to React</li>
-              <li>State Management with Redux</li>
-              <li>Server-side Rendering with Next.js</li>
-              <li>Static Site Generation</li>
-              <li>API Routes in Next.js</li>
-              <li>Deploying Next.js Apps</li>
+              {course.highlights.map((highlight, index) => (
+                <li key={index}>{highlight}</li>
+              ))}
             </ul>
 
             <form onSubmit={handleSubmit} className="mt-8 bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
@@ -126,7 +120,7 @@ const StaticEnroll = () => {
           </div>
 
           <div className="md:w-1/2 flex justify-center">
-            <img src={nestImage} alt="Mastering React and Next.js" className="w-full h-auto rounded-lg shadow-lg object-cover mb-4" />
+            <img src={course.imageUrl} alt={course.title} className="w-full h-auto rounded-lg shadow-lg object-cover mb-4" />
           </div>
         </section>
       </main>
