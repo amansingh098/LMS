@@ -20,7 +20,7 @@ const CoursePreview = () => {
           setCourse(courseData);
 
           // Set the first video as the default selected video
-          if (courseData.chapters.length > 0 && courseData.chapters[0].videos.length > 0) {
+          if (courseData.chapters && courseData.chapters.length > 0 && courseData.chapters[0].videos.length > 0) {
             setSelectedVideo(courseData.chapters[0].videos[0]);
           }
         } else {
@@ -38,13 +38,13 @@ const CoursePreview = () => {
     return <div>Loading...</div>;
   }
 
-  const totalLectures = course.chapters.reduce((acc, chapter) => acc + chapter.videos.length, 0);
-  const totalLength = course.chapters.reduce((acc, chapter) => {
+  const totalLectures = course.chapters ? course.chapters.reduce((acc, chapter) => acc + chapter.videos.length, 0) : 0;
+  const totalLength = course.chapters ? course.chapters.reduce((acc, chapter) => {
     return acc + chapter.videos.reduce((vidAcc, video) => {
       const duration = parseInt(video.duration || 0, 10);
       return vidAcc + (isNaN(duration) ? 0 : duration);
     }, 0);
-  }, 0);
+  }, 0) : 0;
 
   return (
     <div className="flex flex-row max-w-7xl mx-auto p-4 text-white bg-gray-900 space-x-6">
@@ -77,7 +77,7 @@ const CoursePreview = () => {
             <span>{totalLength} minutes total length</span>
           </div>
           <div className="text-gray-400 text-sm">
-            <p>Last updated {course.createdAt.toDate().toLocaleDateString() || "Date"}</p>
+            <p>Last updated {course.createdAt ? course.createdAt.toDate().toLocaleDateString() : "Date"}</p>
             <p>{course.language || "English"}, {course.subtitles || "English [Auto]"}</p>
           </div>
         </div>
@@ -98,13 +98,13 @@ const CoursePreview = () => {
         <h2 className="text-xl font-semibold mb-4">Course content</h2>
         <div className="flex justify-between text-gray-400 mb-2">
           <div className="flex items-center">
-            <span className="mr-4">{course.chapters.length} sections</span>
+            <span className="mr-4">{course.chapters ? course.chapters.length : 0} sections</span>
             <span>{totalLectures} lectures</span>
           </div>
           <span>{totalLength} minutes total length</span>
         </div>
         <div className="border-t border-gray-700 pt-4">
-          {course.chapters.map((chapter, index) => (
+          {course.chapters && course.chapters.map((chapter, index) => (
             <details key={index} className="mb-4">
               <summary className="cursor-pointer font-medium text-lg mb-2">{chapter.title || `Section ${index + 1}`}</summary>
               <ul className="list-none space-y-2 pl-4">

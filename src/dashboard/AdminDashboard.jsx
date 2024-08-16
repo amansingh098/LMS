@@ -5,7 +5,7 @@ import { useNavigate, Outlet } from 'react-router-dom';
 import { FaBook, FaPlus, FaUsers, FaChartBar, FaCog, FaBars, FaTimes } from 'react-icons/fa'; // Import icons from react-icons/fa
 import { useAuth } from '../Authentication/AuthContext'; // Import useAuth from your context
 
-const AdminDashboard = () => {
+const UserDashboard = () => {
   const navigate = useNavigate();
   const [showSidebar, setShowSidebar] = useState(false);
   const { logout, currentUser, role } = useAuth(); // Destructure logout function from useAuth
@@ -83,13 +83,7 @@ const AdminDashboard = () => {
             <FaPlus className="mr-2" />
             Add Courses
           </button>
-          <button
-            onClick={() => handleNavigate('/admin-dashboard/myCourses')}
-            className="flex items-center block py-2 px-4 text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none"
-          >
-            <FaPlus className="mr-2" />
-            My Courses
-          </button>
+  
           <button
             onClick={() => handleNavigate('/admin-dashboard/students')}
             className="flex items-center block py-2 px-4 text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none"
@@ -147,13 +141,7 @@ const AdminDashboard = () => {
             <FaPlus className="mr-2" />
             Add Courses
           </button>
-          <button
-            onClick={() => handleNavigate('/admin-dashboard/myCourses')}
-            className="flex items-center block py-2 px-4 text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none"
-          >
-            <FaPlus className="mr-2" />
-          My Courses
-          </button>
+     
           <button
             onClick={() => handleNavigate('/admin-dashboard/students')}
             className="flex items-center block py-2 px-4 text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none"
@@ -203,4 +191,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard;
+export default UserDashboard;

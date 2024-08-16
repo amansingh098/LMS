@@ -2,8 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { firestore } from '../firebase'; // Import firestore from your Firebase config
 import { useAuth } from '../Authentication/AuthContext'; // Import AuthContext to get the current user
-import CourseCard from '../components/CourseCard'; // Import CourseCard component
-
+import CourseDisplayCard from '../components/displayCard';
 const AllCourses = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -39,7 +38,7 @@ const AllCourses = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {courses.map((course) => (
-        <CourseCard key={course.id} course={course}  />
+        <CourseDisplayCard key={course.id} course={course}  />
       ))}
     </div>
   );

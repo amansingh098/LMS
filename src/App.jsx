@@ -20,9 +20,7 @@ import { useAuth } from './Authentication/AuthContext'; // Adjust path as needed
 import Teach from './student/Teach'; // Import the Teach component
 import BusinessForm from './student/BusinessForm';
 import Aboutus from './Pages/Aboutus';
-import CategoryPage from './enrollpages/CategoryPage';
-import CourseDetails from './enrollpages/CourseDetails';
-import StaticEnroll from './student/StaticEnroll';
+import MyCourses from './dashboard/MyCourses';
 
 // AdminLayout component for protected routes
 const AdminLayout = ({ children }) => {
@@ -61,7 +59,7 @@ const App = () => {
             path="/admin-dashboard" 
             element={
               <AdminLayout>
-                <AdminDashboard />
+                <UserDashboard />
               </AdminLayout>
             }
           >
